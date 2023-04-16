@@ -100,6 +100,7 @@ class PromptManager:
     def get_completion(self, messages):
         response = openai.ChatCompletion.create(
             model="gpt-4",
+            temperature=0.9,
             messages=messages,
         )
         return response["choices"][0]["message"]["content"]
@@ -144,6 +145,7 @@ class PromptManager:
 
         response = openai.ChatCompletion.create(
             model="gpt-4",
+            temperature=0.9,
             messages=self.init_messages
             + [
                 self.get_name_prompt,
