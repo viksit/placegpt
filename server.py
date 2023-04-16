@@ -6,7 +6,7 @@ import quart_cors
 from quart import request
 from cairosvg import svg2png
 import requests
-
+import shutil
 
 from placegpt.render import PromptManager
 from placegpt.replicate_api import stylize
@@ -116,7 +116,7 @@ def write_output_images(objects=[]):
 def convert_svg_to_png(image_path: str, target_path: str):
     with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_file:
         svg2png(url=image_path, write_to=temp_file.name)
-    os.rename(temp_file.name, target_path)
+    shutil.move(temp_file.name, target_path)
 
 
 def download_image(url: str, target_path: str = "static/output.png"):
@@ -126,7 +126,7 @@ def download_image(url: str, target_path: str = "static/output.png"):
         with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_file:
             with open(temp_file.name, "wb") as f:
                 f.write(response.content)
-        os.rename(temp_file.name, target_path)
+        shutil.move(temp_file.name, target_path)
     else:
         print("Error downloading image:", response.status_code)
 
