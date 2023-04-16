@@ -4,12 +4,16 @@ import quart
 import quart_cors
 from quart import request
 
+from placegpt.render import PromptManager
+
 # Note: Setting CORS to allow chat.openapi.com is only required when running a localhost plugin
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 
 PROTO = "http://"  # TODO Make this https
 
 DEBUG = True  # TODO Turn off for production
+
+prompt_manager = PromptManager()
 
 
 @app.get("/logo.png")
@@ -65,13 +69,17 @@ async def home():
 @app.get("/canvas")
 async def canvas():
     # TODO: Fill in with result of running the model
-    filename = "static/cat.svg"
+    filename = "static/output.svg"
     return await quart.send_file(filename, mimetype="image/svg")
 
 
 def handle_instruction(instruction):
     print("Handling instruction:", instruction)
+    prompt_manager.run_prompt_with_state(instruction)
 
+    svg = "\n".join(prompt_manager.img_objects.values())
+    with open("static/output.svg", "w") as f:
+        f.write(svg)
 
 def main():
     app.run(debug=DEBUG, host="0.0.0.0", port=5002)
