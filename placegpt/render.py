@@ -27,7 +27,6 @@ class PromptManager():
   def __init__(self):
     
     self.llm = OpenAI(temperature=0.9, model_name="gpt-4")
-    self.store = {}
     
     self.img_objects = []
     #   {"name": "green square", "svg":  "<svg></svg>"},
