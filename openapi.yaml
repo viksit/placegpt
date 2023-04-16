@@ -26,26 +26,26 @@ paths:
       responses:
         "200":
           description: OK
-  /api/stylize:
-    post:
-      operationId: stylizeImage
-      summary: Prompt to stylize a simple image.
-      parameters:
-        - in: path
-          name: username
-          schema:
-            type: string
-          required: true
-          description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/stylizeRequest"
-      responses:
-        "200":
-          description: OK
+  # /api/stylize:
+  #   post:
+  #     operationId: stylizeImage
+  #     summary: Prompt to stylize a simple image.
+  #     parameters:
+  #       - in: path
+  #         name: username
+  #         schema:
+  #           type: string
+  #         required: true
+  #         description: The name of the user.
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/stylizeRequest"
+  #     responses:
+  #       "200":
+  #         description: OK
 components:
   schemas:
     instructionRequest:

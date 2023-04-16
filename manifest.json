@@ -3,7 +3,7 @@
   "name_for_human": "FiGPT Plugin",
   "name_for_model": "FiGPT",
   "description_for_human": "Plugin that let's you paint pictures to a shared canvas.",
-  "description_for_model": "Plugin that let's you issue commands to a large public canvas. The commands You can add and modify ",
+  "description_for_model": "Plugin that let's you issue commands to a shared, public canvas. Create art with only words.",
   "auth": {
     "type": "none"
   },
