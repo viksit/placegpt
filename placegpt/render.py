@@ -53,7 +53,9 @@ class PromptManager():
 
       - if it is an instruction to add a new item, give this item a name, and return the name of the item followed by the SVG for that item, placed as described in the command. do this in the following format [item:::svg,]
       
-      - if it is an instruction to modify one or more items, figure out which of the items in the canvas is being modified. output the list of items being modified. do this in the following format [item1:::svg,item2:::svg,item3:::svg].
+      - if it is an instruction to modify one or more items, figure out which of the items in the canvas is being modified. output the list of items being modified. do this in the following format [item1:::svg,item2:::svg,item3:::svg]. 
+      
+      when creating the results output, make sure to check that each of the results are in a valid format. if one of the results seems wrong, then do not add it.
       
       {% endif %}
       """
@@ -90,8 +92,14 @@ class PromptManager():
     print("1:", parsed)
     res = []
     for p in parsed:
-      i = p.split(":::")
-      res.append({"name": i[0], "svg": i[1]})
+      if len(p) > 0:
+        try:
+          i = p.split(":::")
+          res.append({"name": i[0], "svg": i[1]})
+        except(e):
+          print("somethign went wrong in parsing this object")
+          print(e)
+        
     print("\n++ parsed: ", parsed)
     print(res)
     return res
