@@ -55,6 +55,11 @@ class PromptManager:
       
       - if it is an instruction to modify one or more items, first figure out which of the items in the canvas is being modified. to do this, figure out which of the names in the list above it is closest to. then, write svg code for this operation.  output the list of items being modified. do this in the following format
       [item1:::svg,,,item2:::svg,,,item3:::svg].
+
+      - if it is an instruction to stylize the image, do not write any svg code. instead write out the exact same instruction in the format
+      S: instruction
+       
+         Instead, write a prompt based on the instruction that will be passed to an generative image model like Stable Diffsion or Dall-e to stylize the image after the SVG has been rendered and rasterized. The output must be in the following format {prompt,,,}
       
       when creating the results output, make sure to check that each of the results are in a valid format. if one of the results seems wrong, then do not add it.
       
