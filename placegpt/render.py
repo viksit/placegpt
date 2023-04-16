@@ -1,5 +1,6 @@
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
+from collections import defaultdict
 
 from jinja2 import Template
 import json
@@ -26,9 +27,10 @@ class PromptManager():
   """
   def __init__(self):
     
-    self.llm = OpenAI(temperature=0.9, model_name="gpt-4")
+    self.llm = OpenAI(temperature=0, model_name="gpt-4")
+    self.store = {}
     
-    self.img_objects = []
+    self.img_objects = defaultdict()
     #   {"name": "green square", "svg":  "<svg></svg>"},
     #   {"name": "orange cat wearing a beret", "svg" : "<svg></svg>"},
     #  {"name": "romantic hazy filter", "svg" : "<svg></svg>"}
@@ -37,7 +39,9 @@ class PromptManager():
     # self.img_objects_list = self.transform_img_objs(self.img_objects)
     
     self.prompt_template = """
-      you are an art model ai. you control a canvas of 1000 by 1000 pixels. this canvas consists of a list of SVG objects on a canvas. users will ask you to update this canvas with different objects.  it is possible there are no elements in the canvas. do not make up any elements unless this list contains elements. if there are no elements in the canvas and there are no instructions, do not output anything. remove all whitespace from the output if you do have one.
+      you are an art model ai. you control a canvas of 1000 by 1000 pixels. this canvas consists of a list of SVG objects on a canvas. users will ask you to update this canvas with different objects.  all of these objects follow an absolute coordinate system. please obey that when adding or modifying objects.
+      
+      it is possible there are no elements in the canvas. do not make up any elements unless this list contains elements. if there are no elements in the canvas and there are no instructions, do not output anything. remove all whitespace from the output if you do have one.
       
       Here are the items currently in this canvas. each item is on a new line.
       
@@ -50,9 +54,9 @@ class PromptManager():
 
       analyze this instruction and please add to or modify the overall canvas image to make it reflect what the user wants.
 
-      - if it is an instruction to add a new item, give this item a name, and return the name of the item followed by the SVG for that item, placed as described in the command. do this in the following format [item:::svg,]
+      - if it is an instruction to add a new item, give this item a name that is descriptive of what it is and where it is, and return the name of the item followed by the SVG for that item, placed as described in the command. do this in the following format [item:::svg,]
       
-      - if it is an instruction to modify one or more items, figure out which of the items in the canvas is being modified. output the list of items being modified. do this in the following format [item1:::svg,item2:::svg,item3:::svg]. 
+      - if it is an instruction to modify one or more items, first figure out which of the items in the canvas is being modified. to do this, figure out which of the names in the list above it is closest to. then, write svg code for this operation.  output the list of items being modified. do this in the following format [item1:::svg,item2:::svg,item3:::svg]. 
       
       when creating the results output, make sure to check that each of the results are in a valid format. if one of the results seems wrong, then do not add it.
       
@@ -83,7 +87,7 @@ class PromptManager():
     parsed_items = self.parse_generated_prompt_result(prompt_result)
     print("++\n prompt parsed", parsed_items)
     for p in parsed_items:
-      self.img_objects.append(p)
+      self.img_objects[p["name"]] = p["svg"]
     print("++ \nimage objects: ", self.img_objects)
     
   def parse_generated_prompt_result(self, prompt_result):
