@@ -9,10 +9,10 @@
   },
   "api": {
     "type": "openapi",
-    "url": "http://figpt.heroku/openapi.yaml",
+    "url": "https://figpt.heroku/openapi.yaml",
     "is_user_authenticated": false
   },
-  "logo_url": "http://figpt.heroku/logo.png",
+  "logo_url": "https://figpt.heroku/logo.png",
   "contact_email": "dummy@email.com",
-  "legal_info_url": "http://figpt.heroku/legal"
+  "legal_info_url": "https://figpt.heroku/"
 }
