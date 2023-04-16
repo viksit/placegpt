@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: HumanGPT Plugin
+  description: Plugin that asks a human for assistance. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  version: 'v1'
+servers:
+  - url: http://localhost:5002
+paths:
+  /tasks/{username}:
+    get:
+      operationId: getTasks
+      summary: Get the list of tasks
+      parameters:
+      - in: path
+        name: username
+        schema:
+            type: string
+        required: true
+        description: The name of the user.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getTasksResponse'
+    post:
+      operationId: addTask
+      summary: Add a task to the list
+      parameters:
+      - in: path
+        name: username
+        schema:
+            type: string
+        required: true
+        description: The name of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addTaskRequest'
+      responses:
+        "200":
+          description: OK
+    delete:
+      operationId: deleteTask
+      summary: Delete a task from the list
+      parameters:
+      - in: path
+        name: username
+        schema:
+            type: string
+        required: true
+        description: The name of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteTaskRequest'
+      responses:
+        "200":
+          description: OK
+
+components:
+  schemas:
+    getTasksResponse:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            type: string
+          description: The list of tasks.
+    addTaskRequest:
+      type: object
+      required:
+      - task
+      properties:
+        task:
+          type: string
+          description: The task to add to the list.
+          required: true
+    deleteTaskRequest:
+      type: object
+      required:
+      - task_idx
+      properties:
+        task_idx:
+          type: integer
+          description: The index of the task to delete.
+          required: true

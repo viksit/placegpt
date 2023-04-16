@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "HumanGPT Plugin",
+  "name_for_model": "human",
+  "description_for_human": "Plugin that asks a human for assistance.",
+  "description_for_model": "Plugin that sends tasks to humans to complete. You can add, remove and view tasks.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:5002/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "http://localhost:5002/logo.png",
+  "contact_email": "dummy@email.com",
+  "legal_info_url": "http://www.example.com/legal"
+}
