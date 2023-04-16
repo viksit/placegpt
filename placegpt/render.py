@@ -51,9 +51,10 @@ class PromptManager:
 
       analyze this instruction and please add to or modify the overall canvas image to make it reflect what the user wants.
 
-      - if it is an instruction to add a new item, give this item a name that is descriptive of what it is and where it is, and return the name of the item followed by the SVG for that item, placed as described in the command. do this in the following format [item:::svg,]
+      - if it is an instruction to add a new item, give this item a name that is descriptive of what it is and where it is, and return the name of the item followed by the SVG for that item, placed as described in the command. do this in the following format [item:::svg,,,]
       
-      - if it is an instruction to modify one or more items, first figure out which of the items in the canvas is being modified. to do this, figure out which of the names in the list above it is closest to. then, write svg code for this operation.  output the list of items being modified. do this in the following format [item1:::svg,item2:::svg,item3:::svg]. 
+      - if it is an instruction to modify one or more items, first figure out which of the items in the canvas is being modified. to do this, figure out which of the names in the list above it is closest to. then, write svg code for this operation.  output the list of items being modified. do this in the following format
+      [item1:::svg,,,item2:::svg,,,item3:::svg].
       
       when creating the results output, make sure to check that each of the results are in a valid format. if one of the results seems wrong, then do not add it.
       
@@ -85,7 +86,7 @@ class PromptManager:
         print("++ \nimage objects: ", self.img_objects)
 
     def parse_generated_prompt_result(self, prompt_result):
-        parsed = prompt_result.split(",")
+        parsed = prompt_result.split(",,,")
         print("1:", parsed)
         res = []
         for p in parsed:
