@@ -29,7 +29,7 @@ paths:
   /api/stylize:
     post:
       operationId: stylizeImage
-      summary: Propmt to styilze a simple image.
+      summary: Prompt to stylize a simple image.
       parameters:
         - in: path
           name: username

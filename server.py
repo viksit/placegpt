@@ -1,8 +1,12 @@
 import mimetypes
 import os
+import tempfile
 import quart
 import quart_cors
 from quart import request
+from cairosvg import svg2png
+import requests
+
 
 from placegpt.render import PromptManager
 from placegpt.replicate_api import stylize
@@ -49,10 +53,12 @@ async def receive_instruction():
     handle_instruction(request["instruction"])
     return quart.Response(response="OK", status=200)
 
+
 @app.post("/api/stylize")
-async def receive_instruction():
+async def stylize_image():
     request = await quart.request.get_json(force=True)
-    style_image = stylize(image_path="static/output.svg", prompt=request["prompt"])
+    style_image_url = stylize(image_path="static/output.png", prompt=request["prompt"])
+    download_image(style_image_url, "static/output.png")
     return quart.Response(response="OK", status=200)
 
 
@@ -73,32 +79,62 @@ async def home():
     return await quart.send_file(filename, mimetype="text/html")
 
 
+SERVE_SVG = False
+
+
 @app.get("/canvas")
 async def canvas():
-    # TODO: Fill in with result of running the model
-    filename = "static/output.svg"
-    return await quart.send_file(filename, mimetype="image/svg")
+    if SERVE_SVG:
+        filename = "static/output.svg"
+        return await quart.send_file(filename, mimetype="image/svg")
+    else:
+        filename = "static/output.png"
+        return await quart.send_file(filename, mimetype="image/png")
 
 
 def handle_instruction(instruction):
     print("Handling instruction:", instruction)
     prompt_manager.run_prompt_with_state(instruction)
 
-    write_output_svg(list(prompt_manager.img_objects.values()))
+    objects = list(prompt_manager.img_objects.values())
+    write_output_images(objects)
 
 
-def write_output_svg(objects=[]):
+def write_output_images(objects=[]):
     header = """ <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000"> """
     footer = """ </svg> """
 
     svg = "\n".join([header] + objects + [footer])
 
-    with open("static/output.svg", "w") as f:
+    svg_path = "static/output.svg"
+    with open(svg_path, "w") as f:
         f.write(svg)
+
+    convert_svg_to_png(svg_path, svg_path.replace(".svg", ".png"))
+
+
+def convert_svg_to_png(image_path: str, target_path: str):
+    with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_file:
+        svg2png(url=image_path, write_to=temp_file.name)
+    os.rename(temp_file.name, target_path)
+
+
+def download_image(url: str, target_path: str = "static/output.png"):
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False) as temp_file:
+            with open(temp_file.name, "wb") as f:
+                f.write(response.content)
+        os.rename(temp_file.name, target_path)
+    else:
+        print("Error downloading image:", response.status_code)
 
 
 def main():
-    write_output_svg()
+    # Initial empty render.
+    write_output_images()
+
     app.run(debug=DEBUG, host="0.0.0.0", port=5002)
 
 

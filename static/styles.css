@@ -40,9 +40,13 @@ body {
   overflow-y: auto;
 }
 
-#svg-container {
+#image-container {
+  width: 1000px;
+  height: 1000px;
   background: #fff;
   border: 1px solid #ccc;
+  /* opacity: 0;
+  transition: opacity 0.8s; */
 }
 
 #chat-list {

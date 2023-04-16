@@ -1,6 +1,6 @@
-const svgContainer = document.getElementById('svg-container');
+const imageContainer = document.getElementById('image-container');
 
-function fetchAndRenderSVG() {
+function fetchAndRenderImage() {
   const url = '/canvas?_=' + Date.now();
 
   fetch(url)
@@ -10,14 +10,16 @@ function fetchAndRenderSVG() {
       }
       return response.text();
     })
-    .then(svgData => {
-      svgContainer.innerHTML = svgData;
+    .then(imageData => {
+      console.log("got imageData", imageData)
+      // imageContainer.innerHTML = imageData;
+      imageContainer.innerHTML = `<img src="${url}" alt="Canvas">`;
     })
     .catch(error => {
-      console.error('There was a problem loading the SVG:', error);
+      console.error('There was a problem loading the image:', error);
     });
 }
 
-fetchAndRenderSVG();
+fetchAndRenderImage();
 
-setInterval(fetchAndRenderSVG, 1000);
+setInterval(fetchAndRenderImage, 1000);
