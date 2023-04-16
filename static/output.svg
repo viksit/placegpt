@@ -1,0 +1,10 @@
+ <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000"> 
+<circle cx="500" cy="500" r="250" fill="none" />
+<circle cx="500" cy="500" r="200" fill="red" />
+<circle cx="500" cy="500" r="150" fill="green" />
+<circle cx="500" cy="500" r="100" fill="yellow" />
+<circle cx="500" cy="500" r="50" fill="white" />
+<circle cx="300" cy="500" r="25" fill="gray" />
+<circle cx="275" cy="500" r="25" fill="gray" /><line x1="250" y1="485" x2="235" y2="470" stroke="black" /><line x1="250" y1="515" x2="235" y2="530" stroke="black" /><line x1="250" y1="500" x2="230" y2="500" stroke="black" />
+<circle cx="100" cy="100" r="20" fill="red" /><circle cx="130" cy="100" r="20" fill="orange" /><circle cx="160" cy="100" r="20" fill="yellow" /><circle cx="190" cy="100" r="20" fill="green" /><circle cx="220" cy="100" r="20" fill="blue" /><circle cx="250" cy="100" r="20" fill="indigo" /><circle cx="280" cy="100" r="20" fill="violet" />
+ </svg> 
