@@ -17,6 +17,11 @@ body {
   text-align: center;
 }
 
+.logo {
+  width: 40px;
+  margin-bottom: -10px;
+}
+
 .container {
   margin-left: 2rem;
 
@@ -32,11 +37,11 @@ body {
 
 .left {
   margin-left: 2rem;
-  width: 66%;
   /* border-right: 1px solid #ccc; */
 }
 
 .right {
+  width: 240px;
   overflow-y: auto;
 }
 
