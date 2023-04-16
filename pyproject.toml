@@ -6,7 +6,7 @@ authors = ["viksit <viksit@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.10.0"
+python = "3.10.9"
 langchain = "^0.0.141"
 jinja2 = "^3.1.2"
 quart = "^0.18.4"
