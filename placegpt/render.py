@@ -90,7 +90,7 @@ class PromptManager():
     # this is raw svg that will be rendered somewhere
     p = self.get_rendered_prompt()  
     
- def get_init_prompt(self, username):
+  def get_init_prompt(self, username):
     # TODO: use username later on for some personalization?
     self.get_prompt()
  
