@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <!-- Cat head -->
+  <circle cx="500" cy="500" r="250" fill="yellow" />
+
+  <!-- Cat ears -->
+  <path d="M300 300 Q425 100 500 300" fill="yellow"/>
+  <path d="M700 300 Q575 100 500 300" fill="yellow"/>
+
+  <!-- Cat eyes -->
+  <ellipse cx="400" cy="475" rx="50" ry="75" fill="black" />
+  <ellipse cx="600" cy="475" rx="50" ry="75" fill="black" />
+
+  <!-- Cat nose -->
+  <path d="M500 500 L475 575 L525 575 Z" fill="pink" />
+
+  <!-- Cat whiskers -->
+  <line x1="250" y1="625" x2="450" y2="625" stroke="red" stroke-width="10" />
+  <line x1="550" y1="625" x2="750" y2="625" stroke="red" stroke-width="10" />
+  <line x1="250" y1="675" x2="450" y2="675" stroke="red" stroke-width="10" />
+  <line x1="550" y1="675" x2="750" y2="675" stroke="red" stroke-width="10" />
+  <line x1="250" y1="725" x2="450" y2="725" stroke="red" stroke-width="10" />
+  <line x1="550" y1="725" x2="750" y2="725" stroke="red" stroke-width="10" />
+</svg>
