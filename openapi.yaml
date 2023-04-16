@@ -1,32 +1,15 @@
 openapi: 3.0.1
 info:
-  title: HumanGPT Plugin
-  description: Plugin that asks a human for assistance. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
+  title: PlaceGPT
+  description: A collaborative canvas where you can draw anything you want, if you use your words carefully. Users can describe what to add or change on the canvas. If you do not know the user's username, ask them first before making queries to the plugin. 
   version: 'v1'
 servers:
-  - url: http://localhost:5002
+  - url: PLUGIN_HOSTNAME
 paths:
-  /api/{instruction}:
-    get:
-      operationId: receiveInstruction
-      summary: Send instruction to PlaceGPT canvas
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getTasksResponse'
+  /api/draw:
     post:
-      operationId: addTask
-      summary: Add a task to the list
+      operationId: drawInstruction
+      summary: Instruction of what to change on the canvas.
       parameters:
       - in: path
         name: username
@@ -39,55 +22,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/addTaskRequest'
+              $ref: '#/components/schemas/instructionRequest'
       responses:
         "200":
           description: OK
-    delete:
-      operationId: deleteTask
-      summary: Delete a task from the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteTaskRequest'
-      responses:
-        "200":
-          description: OK
-
 components:
   schemas:
-    getTasksResponse:
-      type: object
-      properties:
-        tasks:
-          type: array
-          items:
-            type: string
-          description: The list of tasks.
-    addTaskRequest:
+    instructionRequest:
       type: object
       required:
-      - task
+      - instruction
       properties:
-        task:
+        instruction:
           type: string
-          description: The task to add to the list.
-          required: true
-    deleteTaskRequest:
-      type: object
-      required:
-      - task_idx
-      properties:
-        task_idx:
-          type: integer
-          description: The index of the task to delete.
+          description: A description of what items to add or change on the canvas.
           required: true
