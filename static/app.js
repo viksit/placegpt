@@ -1,7 +1,9 @@
 const svgContainer = document.getElementById('svg-container');
 
 function fetchAndRenderSVG() {
-  fetch('/canvas')
+  const url = '/canvas?_=' + Date.now();
+
+  fetch(url)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -18,4 +20,4 @@ function fetchAndRenderSVG() {
 
 fetchAndRenderSVG();
 
-setInterval(fetchAndRenderSVG, 500);
+setInterval(fetchAndRenderSVG, 1000);

@@ -77,14 +77,21 @@ def handle_instruction(instruction):
     print("Handling instruction:", instruction)
     prompt_manager.run_prompt_with_state(instruction)
 
+    write_output_svg(list(prompt_manager.img_objects.values()))
+
+
+def write_output_svg(objects=[]):
     header = """ <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000"> """
     footer = """ </svg> """
 
-    svg = "\n".join([header] + list(prompt_manager.img_objects.values()) + [footer])
+    svg = "\n".join([header] + objects + [footer])
+
     with open("static/output.svg", "w") as f:
         f.write(svg)
 
+
 def main():
+    write_output_svg()
     app.run(debug=DEBUG, host="0.0.0.0", port=5002)
 
 
