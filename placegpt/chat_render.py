@@ -63,7 +63,7 @@ class PromptManager:
 
         self.get_name_prompt = {
             "role": "system",
-            "content": "Analyze the instruction above carefully. If it is an instruction to add a new item, give this item a name that is descriptive of what it is and where it is, and return the name of the item. Else, if it is an instruction to modify one or more items, first figure out which of the items in the canvas is being modified. To do this, figure out which of the names in the list above it is closest to, then return that name. **Important**: please return only a single name. Do not add any other text to the output. Remove all whitespace from the output if you do have one.",
+            "content": "Analyze the instruction above carefully. If it is an instruction to add/draw/create a new item, give this item a name that is descriptive of what it is and where it is, and return the name of the item. Else, if it is an instruction to modify one or more items, first figure out which of the items in the canvas is being modified. To do this, figure out which of the names in the list above it is closest to, then return that name. **Important**: please return only a single name. Do not add any other text to the output. Remove all whitespace from the output if you do have one.",
         }
 
         self.add_svg_prompt = {
