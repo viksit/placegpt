@@ -9,7 +9,7 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://figpt.herokuapp.com/.well-known/ai-plugin.json",
+    "url": "https://figpt.herokuapp.com/openapi.yaml",
     "has_user_authentication": false
   },
   "logo_url": "https://figpt.herokuapp.com/static/logo.png",
