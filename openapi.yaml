@@ -6,10 +6,10 @@ info:
 servers:
   - url: http://localhost:5002
 paths:
-  /tasks/{username}:
+  /api/{instruction}:
     get:
-      operationId: getTasks
-      summary: Get the list of tasks
+      operationId: receiveInstruction
+      summary: Send instruction to PlaceGPT canvas
       parameters:
       - in: path
         name: username

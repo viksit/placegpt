@@ -1,9 +1,9 @@
 {
   "schema_version": "v1",
-  "name_for_human": "HumanGPT Plugin",
-  "name_for_model": "human",
-  "description_for_human": "Plugin that asks a human for assistance.",
-  "description_for_model": "Plugin that sends tasks to humans to complete. You can add, remove and view tasks.",
+  "name_for_human": "PlaceGPT Plugin",
+  "name_for_model": "PlaceGPT",
+  "description_for_human": "Plugin that let's you paint pictures to a shared canvas.",
+  "description_for_model": "Plugin that let's you issue commands to a large public canvas. The commands You can add and modify ",
   "auth": {
     "type": "none"
   },

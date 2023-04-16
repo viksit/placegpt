@@ -9,7 +9,7 @@ app = quart_cors.cors(quart.Quart(__name__), allow_origin="*")
 OBJECTS = {}
 
 @app.post("/api/<string:instruction>")
-async def receive_instruction():
+async def receive_instruction(instruction):
     request = await quart.request.get_json(force=True)
     if username not in _TASKS:
         _TASKS[username] = []
