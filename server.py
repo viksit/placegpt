@@ -8,8 +8,8 @@ from cairosvg import svg2png
 import requests
 import shutil
 
-from chat_render import PromptManager
-from replicate_api import stylize
+from placegpt.chat_render import PromptManager
+from placegpt.replicate_api import stylize
 
 # Note: Setting CORS to allow chat.openapi.com is only required when running a localhost plugin
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
