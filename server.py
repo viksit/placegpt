@@ -11,7 +11,7 @@ from cairosvg import svg2png
 import requests
 import shutil
 
-from placegpt.render import PromptManager
+from placegpt.chat_render import PromptManager
 from placegpt.replicate_api import stylize
 
 # Note: Setting CORS to allow chat.openapi.com is only required when running a localhost plugin
@@ -128,6 +128,10 @@ def handle_instruction(instruction):
 
     objects = list(prompt_manager.img_objects.values())
     write_output_images(objects)
+
+    if prompt_manager.style_prompt:
+        style_image_url = stylize(image_path="static/output.png", prompt=prompt_manager.style_prompt)
+        download_image(style_image_url, "static/output.png")
 
 
 def write_output_images(objects=[]):

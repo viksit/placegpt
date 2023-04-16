@@ -1,13 +1,12 @@
-from render import PromptManager
 import click
-
-p = PromptManager()
+from server import handle_instruction
 
 @click.command()
 def interactive_prompt():
     while True:
         instruction = input("Instruction: ")
-        res = p.run_prompt_with_state(instruction)
+        res = handle_instruction(instruction)
+        print(res)
 
 
 if __name__ == '__main__':
