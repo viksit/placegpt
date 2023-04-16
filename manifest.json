@@ -1,7 +1,7 @@
 {
   "schema_version": "v1",
-  "name_for_human": "PlaceGPT Plugin",
-  "name_for_model": "PlaceGPT",
+  "name_for_human": "FiGPT Plugin",
+  "name_for_model": "FiGPT",
   "description_for_human": "Plugin that let's you paint pictures to a shared canvas.",
   "description_for_model": "Plugin that let's you issue commands to a large public canvas. The commands You can add and modify ",
   "auth": {
@@ -9,8 +9,8 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://figpt.herokuapp.com/",
-    "is_user_authenticated": false
+    "url": "https://figpt.herokuapp.com/.well-known/openapi.yaml",
+    "has_user_authentication": false
   },
   "logo_url": "https://figpt.herokuapp.com/static/logo.png",
   "contact_email": "info@figpt.herokuapp.com",

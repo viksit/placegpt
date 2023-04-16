@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: PlaceGPT
-  description: A collaborative canvas where you can draw anything you want, if you use your words carefully. Users can describe what to add or change on the canvas. If you do not know the user's username, ask them first before making queries to the plugin.
+  title: FigGPT
+  description: A collaborative canvas where you can draw anything you want, if you use your words carefully. Users can describe what to add or change on the canvas. 
   version: "v1"
 servers:
   - url: PLUGIN_HOSTNAME
