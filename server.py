@@ -1,6 +1,9 @@
+import json
 import mimetypes
 import os
 import tempfile
+import threading
+from functools import wraps
 import quart
 import quart_cors
 from quart import request
@@ -62,6 +65,12 @@ async def stylize_image():
     return quart.Response(response="OK", status=200)
 
 
+@app.get("/history")
+async def history():
+    history_json = json.dumps(history)
+    return quart.Response(response=history_json, status=200, mimetype="text/json")
+
+
 @app.route("/static/<path:filename>")
 async def serve_files(filename):
     filepath = os.path.join("static", filename)
@@ -92,9 +101,30 @@ async def canvas():
         return await quart.send_file(filename, mimetype="image/png")
 
 
+instructions_list = []
+
+
+# Handle one request at a time.
+def synchronized(func):
+    lock = threading.Lock()
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        with lock:
+            return func(*args, **kwargs)
+
+    return wrapper
+
+
+history = []
+
+
+@synchronized
 def handle_instruction(instruction):
     print("Handling instruction:", instruction)
     prompt_manager.run_prompt_with_state(instruction)
+
+    history.append(instruction)
 
     objects = list(prompt_manager.img_objects.values())
     write_output_images(objects)
