@@ -20,7 +20,7 @@ function updateContent() {
   };
 
   // Update chat history
-  fetch('/history')
+  fetch('/history?_=' + Date.now())
     .then(response => response.json())
     .then(chatHistory => {
       const tempChatContainer = document.createElement('div');
