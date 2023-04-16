@@ -130,12 +130,14 @@ def handle_instruction(instruction):
     write_output_images(objects)
 
     if prompt_manager.style_prompt:
-        style_image_url = stylize(image_path="static/output.png", prompt=prompt_manager.style_prompt)
+        style_image_url = stylize(
+            image_path="static/output.png", prompt=prompt_manager.style_prompt
+        )
         download_image(style_image_url, "static/output.png")
 
 
 def write_output_images(objects=[]):
-    header = """ <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000"> """
+    header = """ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 1000 1000"> """
     footer = """ </svg> """
 
     svg = "\n".join([header] + objects + [footer])
