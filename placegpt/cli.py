@@ -5,9 +5,9 @@ p = PromptManager()
 
 @click.command()
 def interactive_prompt():
-    instruction = input("Enter a propmt: ")
-    res = p.mutate_prompt_state(instruction)
-    print(res)
+    while True:
+        instruction = input("Instruction: ")
+        res = p.run_prompt_with_state(instruction)
 
 
 if __name__ == '__main__':
