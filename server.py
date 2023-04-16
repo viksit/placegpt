@@ -17,9 +17,9 @@ from placegpt.replicate_api import stylize
 # Note: Setting CORS to allow chat.openapi.com is only required when running a localhost plugin
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 
-PROTO = "http://"  # TODO Make this https
+PROTO = "https://"  # TODO Make this https
 
-DEBUG = True  # TODO Turn off for production
+DEBUG = False  # TODO Turn off for production
 
 prompt_manager = PromptManager()
 
