@@ -25,6 +25,7 @@ def stylize(image_path="static/output.svg", prompt: str = "aestheic"):
 
 
 # %%
-stylize(prompt="aesthetic solar system")
+if __name__ == "__main__":
+    stylize(prompt="aesthetic solar system")
 
 # %%
