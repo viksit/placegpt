@@ -1,25 +1,23 @@
 const imageContainer = document.getElementById('image-container');
+const imgElement = document.createElement('img');
+imgElement.alt = 'Canvas';
+imageContainer.appendChild(imgElement);
 
-function fetchAndRenderImage() {
+function updateImage() {
   const url = '/canvas?_=' + Date.now();
 
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.text();
-    })
-    .then(imageData => {
-      console.log("got imageData", imageData)
-      // imageContainer.innerHTML = imageData;
-      imageContainer.innerHTML = `<img src="${url}" alt="Canvas">`;
-    })
-    .catch(error => {
-      console.error('There was a problem loading the image:', error);
-    });
+  const tempImg = new Image();
+  tempImg.src = url;
+  tempImg.onload = () => {
+    imgElement.classList.add('fade-out');
+    imgElement.classList.add('image-canvas');
+    setTimeout(() => {
+      imgElement.src = tempImg.src;
+      imgElement.classList.remove('fade-out');
+    }, 300);
+  };
 }
 
-fetchAndRenderImage();
+updateImage();
 
-setInterval(fetchAndRenderImage, 1000);
+setInterval(updateImage, 1000);

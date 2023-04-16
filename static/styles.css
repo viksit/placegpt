@@ -41,12 +41,20 @@ body {
 }
 
 #image-container {
-  width: 1000px;
-  height: 1000px;
+  width: 800px;
+  height: 800px;
   background: #fff;
   border: 1px solid #ccc;
-  /* opacity: 0;
-  transition: opacity 0.8s; */
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.image-canvas {
+  width: 100%;
+}
+
+.image-container img.fade-out {
+  opacity: 0;
 }
 
 #chat-list {
