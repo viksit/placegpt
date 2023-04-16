@@ -1,2 +1,7 @@
 quart
 quart_cors
+cairosvg
+diffusers
+opencv-contrib-python
+transformers
+replicate

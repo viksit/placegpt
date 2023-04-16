@@ -5,6 +5,7 @@ import quart_cors
 from quart import request
 
 from placegpt.render import PromptManager
+from placegpt.replicate_api import stylize
 
 # Note: Setting CORS to allow chat.openapi.com is only required when running a localhost plugin
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
@@ -46,6 +47,12 @@ async def openapi_spec():
 async def receive_instruction():
     request = await quart.request.get_json(force=True)
     handle_instruction(request["instruction"])
+    return quart.Response(response="OK", status=200)
+
+@app.post("/api/stylize")
+async def receive_instruction():
+    request = await quart.request.get_json(force=True)
+    style_image = stylize(image_path="static/output.svg", prompt=request["prompt"])
     return quart.Response(response="OK", status=200)
 
 
